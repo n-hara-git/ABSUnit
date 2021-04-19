@@ -14,16 +14,11 @@ class ABSUtil:
         self.object = BlockBlobService(
             account_name=self.account_name, account_key=self.account_key)
 
-        print("account_name=" + account_name)
-        print("account_key=" + account_key)
-        print("container_name=" + container_name)
         
 
     def upload(self, dest, file_path):
         self.object.create_blob_from_path(self.container_name, dest, file_path,
                                   content_settings=ContentSettings(mimetypes.guess_type(file_path)[0]))
-        print("dest=" + dest)
-        print("file_path=" + file_path)
 
 
     def upload_dir(self, dest, dir_path):
@@ -31,8 +26,6 @@ class ABSUtil:
             for filename in files:
                 self.upload(os.path.join(dest, root, filename),
                             os.path.join(root, filename))
-        print("dest=" + dest)
-        print("dir_path=" + dir_path)
 
 def main():
     parser = argparse.ArgumentParser(description='write something')
